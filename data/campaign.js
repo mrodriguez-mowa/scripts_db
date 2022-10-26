@@ -1,7 +1,7 @@
 const { faker } = require('@faker-js/faker')
 
 const campaignStructure = (payload) => {
-    const { campaignId, userId, userName, channel, quantity, speech, sendType, creationDate, segment } = payload
+    const { campaignId, userId, userName, channel, quantity, speech, sendType, creationDate, segment, programmingSchedules } = payload
     const structure = {
         "PK": {
             "S": `CLIENT#${userId}`
@@ -75,7 +75,7 @@ const campaignStructure = (payload) => {
             "S": `${creationDate}`
         },
         "Description": {
-            "S": `Campaña ${faker.random.numeric(2)}`
+            "S": `Campaña ${campaignId}`
         },
         "DiscardedContacts": {
             "L": [
@@ -121,15 +121,10 @@ const campaignStructure = (payload) => {
                             }
                         },
                         "Intensity": {
-                            "N": "1" // ADS FOR THIS USER LENGTH
+                            "N": programmingSchedules.L.length.toString()// ADS FOR THIS USER LENGTH
                         },
-                        "Schedules": {
-                            "L": [ // ARRAY SCHEDULES THIS CAMPAIGN
-                                {
-                                    "S": "2022-10-17 17:19:15"
-                                }
-                            ]
-                        }
+                        "Schedules": programmingSchedules
+                        
                     }
                 }
             ]
@@ -158,7 +153,7 @@ const campaignStructure = (payload) => {
                                 }
                             }
                         },
-                        "Content": { // SPEECH THIS CAMPAIGN
+                        "Content": {
                             "S": `${speech}`
                         },
                         "Format": {
@@ -174,30 +169,8 @@ const campaignStructure = (payload) => {
                 }
             ]
         },
-        "SendType": {
-            "L": [
-                {
-                    "M": {
-                        "Channel": {
-                            "M": {
-                                "Id": {
-                                    "S": "1"
-                                },
-                                "Name": {
-                                    "S": `${channel}`
-                                }
-                            }
-                        },
-                        "Id": {
-                            "S": sendType === 'LARGO' ? "1" : "2" 
-                        },
-                        "Name": {
-                            "S": `${channel}${sendType}`
-                        }
-                    }
-                }
-            ]
-        },
+        "SendType": sendType
+        ,
         "Status": {
             "N": "1"
         },

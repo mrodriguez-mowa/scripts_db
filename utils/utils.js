@@ -26,6 +26,13 @@ class Utils {
       const PeruTime = new Date(utcTime + (3600000 * timeOffset));
       return PeruTime;
       };
+
+      static SerialDateToJSDate(serialDate) {
+        var days = Math.floor(serialDate);
+        var hours = Math.floor((serialDate % 1) * 24);
+        var minutes = Math.floor((((serialDate % 1) * 24) - hours) * 60)
+        return new Date(Date.UTC(0, 0, serialDate, hours-17, minutes));
+      }
 }
 
 

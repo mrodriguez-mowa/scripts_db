@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/mrodriguez-mowa/scripts_db#readme",
   "dependencies": {
+    "moment": "^2.29.4",
+    "util": "^0.12.5",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
