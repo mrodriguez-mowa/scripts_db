@@ -159,7 +159,7 @@ const campaignStructure = (payload) => {
                             }
                         },
                         "Content": { // SPEECH THIS CAMPAIGN
-                            "S": "[NOMBRE] [APELLIDO] DNI: [DNI]. Aprovecha la feria de dcto sobre tu compromiso por fiestas patrias, llama 982295079"
+                            "S": `${speech}`
                         },
                         "Format": {
                             "S": "plain/text"
